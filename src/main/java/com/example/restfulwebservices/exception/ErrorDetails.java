@@ -6,13 +6,14 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Getter
 @StackTrace
 @NoArgsConstructor
 @AllArgsConstructor
 public class ErrorDetails {
-    private LocalDate timeStamp;
+    private LocalDateTime timeStamp;
     private String message;
     private String details;
 }

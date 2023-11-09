@@ -26,8 +26,13 @@ public class UserController {
     }
 
     @GetMapping("/users/{id}")
-    public User getUsers(@PathVariable(name = "id") Integer id){
+    public User getUser(@PathVariable(name = "id") Integer id){
         return userService.findById(id);
+    }
+
+    @DeleteMapping("/users/{id}")
+    public void deleteUsers(@PathVariable(name = "id") Integer id){
+        userService.deleteById(id);
     }
 
     @PostMapping("/users")

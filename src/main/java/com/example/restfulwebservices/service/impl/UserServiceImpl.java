@@ -46,4 +46,18 @@ public class UserServiceImpl implements UserService {
 
         return  user;
     }
+
+    @Override
+    public void deleteById(Integer id) {
+        User userToDelete = users.stream()
+                .filter(user -> user.getId().equals(id))
+                .findFirst()
+                .orElse(null);
+
+        if(userToDelete == null) {
+            throw  new NotFoundException("id: "+ id);
+        }
+
+        users.remove(userToDelete);
+    }
 }
