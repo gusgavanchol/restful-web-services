@@ -1,5 +1,9 @@
 package com.example.restfulwebservices.model;
 
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Past;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,7 +17,13 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class User {
     private Integer id;
+
+    @NotEmpty(message = "Name must not be empty")
+    @Size(min = 3, message = "Name should have at least 2 chars")
     private String name;
+
+    @Past(message = "Date should be in the past")
+    @NotNull(message = "Date should not be null")
     private LocalDate birthData;
 
     @Override

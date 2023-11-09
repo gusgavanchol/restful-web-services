@@ -2,6 +2,7 @@ package com.example.restfulwebservices.controller;
 
 import com.example.restfulwebservices.model.User;
 import com.example.restfulwebservices.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -36,7 +37,7 @@ public class UserController {
     }
 
     @PostMapping("/users")
-    public ResponseEntity<User> addUser(@RequestBody User user){
+    public ResponseEntity<User> addUser(@Valid @RequestBody User user){
         User userAdded = userService.add(user);
 
         URI location = ServletUriComponentsBuilder.fromCurrentRequest()
