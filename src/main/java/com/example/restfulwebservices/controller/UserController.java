@@ -3,8 +3,11 @@ package com.example.restfulwebservices.controller;
 import com.example.restfulwebservices.model.User;
 import com.example.restfulwebservices.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -28,7 +31,14 @@ public class UserController {
     }
 
     @PostMapping("/users")
-    public void addUser(@RequestBody User user){
-        userService.add(user);
+    public ResponseEntity<User> addUser(@RequestBody User user){
+        User userAdded = userService.add(user);
+
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(userAdded.getId())
+                .toUri();
+
+        return ResponseEntity.created(location).build();
     }
 }
